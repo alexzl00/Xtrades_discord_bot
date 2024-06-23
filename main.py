@@ -46,7 +46,9 @@ async def send_hourly_message() -> None:
         
         await asyncio.sleep(sleep_seconds)
         
-        await channel.send(fetch_kline(from_user_message=False))
+        message_to_send = fetch_kline(from_user_message=False)
+        if message_to_send != 'not send':
+            await channel.send(message_to_send)
 
 async def send_bot_commands() -> None:
     await client.wait_until_ready()
@@ -73,7 +75,6 @@ async def on_message(message: Message) -> None:
     await send_message(message, user_message)
 
 if __name__ == '__main__':
-    # Run the client with the token
     client.run(token=TOKEN)
         
         

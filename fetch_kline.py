@@ -16,8 +16,8 @@ def count_RSI(prices: list) -> float:
     rsi = talib.RSI(numpy_prices, timeperiod=14)
     return np.round(rsi[-1], decimals=2)
 
-
-def fetch_kline(from_user_message=True) -> str:
+# from_user_message if set to true means that the function was called by a user message
+def fetch_kline(from_user_message: bool = True) -> str:
 
     # Define the URL and parameters
     base_url = 'https://api-testnet.bybit.com'
@@ -32,10 +32,6 @@ def fetch_kline(from_user_message=True) -> str:
 
     if response.status_code == 200:
         prices = [float(price[4]) for price in response.json()['result']['list']] # price[4] is the close price of bar
-        # print(prices)
-
-        bar_times = [(datetime.fromtimestamp(int(time[0])/1000)).strftime('%Y-%m-%d %H:%M:%S') for time in response.json()['result']['list']]
-        # print(bar_times)
 
         rsi = count_RSI(prices)
 
@@ -45,7 +41,12 @@ def fetch_kline(from_user_message=True) -> str:
         if rsi <= 30:
             return f'Hurry up not to miss the chance to BUY!\nRSI is {rsi}!'
         
+        # if user sent the message, otherwise it is not sent to Discord
         if from_user_message:
             return f'No sense to make new ORDER!\nRSI is only {rsi}'
+        
+        # we will not send any message to Discord
+        return 'not send'
     else:
         print(f"Error: {response.status_code} - {response.text}")
+        return 'error'
