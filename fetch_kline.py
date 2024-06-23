@@ -1,14 +1,9 @@
 import requests
 from dotenv import load_dotenv
-import os
-from datetime import datetime
 import talib
 import numpy as np
 
 load_dotenv()
-
-API_KEY = os.getenv('API_KYE')
-API_SECRET = os.getenv('API_SECRET')
 
 def count_RSI(prices: list) -> float:
     numpy_prices = np.array(prices, dtype=np.float64)
