@@ -1,0 +1,43 @@
+/////
+invite to Discord channel: https://discord.gg/QHauW5Z7
+expires 30.06.2024
+/////
+
+/////
+if you encounter error "SSL: CERTIFICATE_VERIFY_FAILED" write in terminal:
+pip3 install certifi
+
+replace 3.9 with your current python version
+/Applications/Python\ 3.9/Install\ Certificates.command
+/////
+
+/////
+P.S. you need brew to install the talib
+To install brew enter in terminal:
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+Then:
+(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/alexzlobin/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+
+After:
+brew install ta-lib
+
+pip3 install ta-lib
+/////
+
+/////
+If you encounter error:
+numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject
+
+Then downgrade numpy:
+pip3 install numpy==1.26
+/////
+
+/////
+To create the container in Docker Desktop use following command in shell:
+
+docker-compose up --build
+
+To stop and run the project you can just simply use Docker Desktop
+/////
